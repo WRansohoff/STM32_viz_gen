@@ -1,0 +1,79 @@
+
+\documentclass{article}
+\usepackage{multirow}
+\usepackage[table]{xcolor}
+\usepackage{tikz}
+\usepackage{tgheros}
+% The default underscores are very short :/
+\renewcommand{\_}[0]{\rule{5pt}{1pt}}
+% Use sans-serif font by default.
+\renewcommand{\familydefault}{\sfdefault}
+% Convenience commands for table styling.
+\newcommand{\upr}[1]{\raisebox{0.5em}[0.5em][0em]{#1}}
+\newcommand{\upri}[1]{\upr{\textit{#1}}}
+\newcommand{\uprb}[1]{\upr{\textbf{#1}}}
+% Styling for 'N/A' cells.
+\newcommand{\tcna}[1]{\cellcolor[HTML]{CCCCCC} \textit{#1}}
+\newcommand{\tcnaup}[1]{\tcna{\upri{#1}}}
+% Styling for peripheral cells.
+\newcommand{\tcpA}[1]{\cellcolor[HTML]{2EF43F} #1}
+\newcommand{\tcpAup}[1]{\upr{\cellcolor[HTML]{2EF43F} #1}}
+\newcommand{\tcpB}[1]{\cellcolor[HTML]{EF7CD8} #1}
+\newcommand{\tcpBup}[1]{\upr{\cellcolor[HTML]{EF7CD8} #1}}
+\newcommand{\tcpC}[1]{\cellcolor[HTML]{1DABE2} #1}
+\newcommand{\tcpCup}[1]{\upr{\cellcolor[HTML]{1DABE2} #1}}
+\newcommand{\tcpD}[1]{\cellcolor[HTML]{E83030} #1}
+\newcommand{\tcpDup}[1]{\upr{\cellcolor[HTML]{E83030} #1}}
+\newcommand{\tcpE}[1]{\cellcolor[HTML]{C8EA1E} #1}
+\newcommand{\tcpEup}[1]{\upr{\cellcolor[HTML]{C8EA1E} #1}}
+\newcommand{\tcpF}[1]{\cellcolor[HTML]{F2840E} #1}
+\newcommand{\tcpFup}[1]{\upr{\cellcolor[HTML]{F2840E} #1}}
+% Set page dimensions.
+\usepackage[paperwidth=150em, paperheight=35em,
+            top=5em, bottom=0em, left=0em, right=0em]{geometry}
+
+\begin{document}
+\pagenumbering{gobble}
+
+\begin{table}[h!]
+  \begin{center}
+    \begin{tikzpicture}
+      \node (table) [inner sep=0pt] {
+        \begin{tabular}{l|c|c|c|c|c|c|c|c|c|c|c|c|c|c}
+\multirow{2}{*}{\textbf{Pin Name}} & & & & & & & & & & & & & & \\
+& \uprb{VDD}& \uprb{PC14}& \uprb{PC15}& \uprb{NRST}& \uprb{VDDA}& \uprb{PA0-CK\_IN}& \uprb{PA1}& \uprb{PA2}& \uprb{PA3}& \uprb{PA4}& \uprb{PA5}& \uprb{PA6}& \uprb{PA7}& \uprb{PB0}\\
+\hline
+\textbf{I2C}
+& \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcpA{I2C1\_SMBA} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A}  \\
+\hline
+\textbf{SPI/I2S}
+& \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcpA{SPI1\_NSS} & \tcpA{SPI1\_SCK} & \tcpA{SPI1\_MISO} & \tcpA{SPI1\_MOSI} & \tcpA{SPI1\_MISO}  \\
+\hline
+\multirow{2}{*}{\textbf{USART}}& \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcpB{} & \tcpB{USART2\_RTS} & \tcpB{USART2\_TX} & \tcpB{USART2\_RX} & \tcpB{} & \tcna{} & \tcpA{} & \tcpB{} & \tcpB{USART2\_RTS}  \\
+& \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcpBup{USART2\_CTS} & \tcpB{USART2\_DE} & \tcpA{LPUART1\_TX} & \tcpA{LPUART1\_RX} & \tcpBup{USART2\_CK} & \tcnaup{N/A} & \tcpAup{LPUART1\_CTS} & \tcpBup{USART2\_CTS} & \tcpB{USART2\_DE}  \\
+\hline
+\textbf{ADC/DAC}
+& \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcpA{ADC\_IN0} & \tcpA{ADC\_IN1} & \tcpA{ADC\_IN2} & \tcpA{ADC\_IN3} & \tcpA{ADC\_IN4} & \tcpA{ADC\_IN5} & \tcpA{ADC\_IN6} & \tcpA{ADC\_IN7} & \tcpA{ADC\_IN8}  \\
+\hline
+\multirow{3}{*}{\textbf{Timers}}& \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcpA{LPTIM1\_IN1} & \tcpA{LPTIM1\_IN2} & \tcpC{} & \tcpC{} & \tcpA{} & \tcpA{LPTIM1\_IN2} & \tcpA{} & \tcpA{} & \tcpB{}  \\
+& \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcpB{TIM2\_CH1} & \tcpB{TIM2\_CH2} & \tcpCup{TIM21\_CH1} & \tcpCup{TIM21\_CH2} & \tcpAup{LPTIM1\_IN1} & \tcpB{TIM2\_ETR} & \tcpAup{LPTIM1\_ETR} & \tcpAup{LPTIM1\_OUT} & \tcpB{TIM2\_CH3}  \\
+& \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcpB{TIM2\_ETR} & \tcpC{TIM21\_ETR} & \tcpB{TIM2\_CH3} & \tcpB{TIM2\_CH4} & \tcpD{TIM22\_ETR} & \tcpB{TIM2\_CH1} & \tcpD{TIM22\_CH1} & \tcpD{TIM22\_CH2} & \tcpB{}  \\
+\hline
+\multirow{2}{*}{\textbf{Comparators}}& \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcpA{COMP1\_INM6} & \tcpA{} & \tcpB{COMP2\_INM6} & \tcpB{} & \tcpB{COMP2\_INM4} & \tcpB{COMP2\_INM5} & \tcpA{} & \tcpB{} & \tcna{}  \\
+& \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcpA{COMP1\_OUT} & \tcpAup{COMP1\_INP} & \tcpB{COMP2\_OUT} & \tcpBup{COMP2\_INP} & \tcpA{COMP1\_INM4} & \tcpA{COMP1\_INM5} & \tcpAup{COMP1\_OUT} & \tcpBup{COMP2\_OUT} & \tcnaup{N/A}  \\
+\hline
+\multirow{4}{*}{\textbf{Other}}& \tcpD{} & \tcpC{} & \tcpC{} & \tcpE{} & \tcpD{} & \tcpB{} & \tcna{} & \tcpC{RTC\_TAMP3} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcpD{}  \\
+& \tcpD{} & \tcpC{} & \tcpC{} & \tcpE{} & \tcpD{} & \tcpBup{RTC\_TAMP2} & \tcna{} & \tcpE{RTC\_TS} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcpD{}  \\
+& \tcpDup{Digital power supply} & \tcpCup{OSC32\_IN} & \tcpCup{OSC32\_OUT} & \tcpEup{Reset} & \tcpDup{Analog power supply} & \tcpA{} & \tcnaup{N/A} & \tcpE{RTC\_OUT} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcpDup{VREF\_OUT}  \\
+& \tcpD{} & \tcpC{} & \tcpC{} & \tcpE{} & \tcpD{} & \tcpAup{WKUP1} & \tcna{} & \tcpC{WKUP3} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcpD{}  \\
+\hline
+
+        \end{tabular}
+      };
+      \draw [rounded corners=0.5em]
+        (table.north west) rectangle (table.south east);
+    \end{tikzpicture}
+  \end{center}
+\end{table}
+
+\end{document}
