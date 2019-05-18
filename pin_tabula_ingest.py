@@ -43,33 +43,37 @@ for row in pin_lines:
   if not row[ pin_col ].replace( '"', '' ) == "-":
     # TODO: BGA packages use alphanumeric.
     pin_num = int( row[ pin_col ] )
+    pin_name = row[ len( row ) - 6 ]
+    if '(' in pin_name:
+      pin_name = pin_name[ : pin_name.find( '(' ) ]
+    if ( pin_num >= len( pin_rows ) ):
+      continue
     pin_rows[ pin_num ] = {
-      "name":  row[ len( row ) - 6 ],
+      "name":  pin_name,
       "type1": row[ len( row ) - 5 ],
       "type2": row[ len( row ) - 4 ],
-      "peripherals": row[ len( row ) - 2 ].split( "," ),
+      "peripherals": [] if ( row[ len( row ) - 2 ] == '-' ) else row[ len( row ) - 2 ].replace( "-", "," ).split( "," ),
     }
     if row[ len( row ) - 1 ] != '-' and row[ len( row ) - 1 ] != '--':
-      pin_rows[ pin_num ][ "peripherals" ] = pin_rows[ pin_num ][ "peripherals" ] + row[ len( row ) - 1 ].split( "," )
+      pin_rows[ pin_num ][ "peripherals" ] = pin_rows[ pin_num ][ "peripherals" ] + row[ len( row ) - 1 ].replace( "-", "," ).split( "," )
     for ind in range( len( pin_rows[ pin_num ][ "peripherals" ] ) ):
       pin_rows[ pin_num ][ "peripherals" ][ ind ] = pin_rows[ pin_num ][ "peripherals" ][ ind ]
     if '-' in pin_rows[ pin_num ][ "peripherals" ]:
       pin_rows[ pin_num ][ "peripherals" ].remove( '-' )
-    if len( pin_rows[ pin_num ][ "peripherals" ] ) == 0:
-      if 'VSSA' in pin_rows[ pin_num ][ "name" ]:
-        pin_rows[ pin_num ][ "peripherals" ].append( "Analog ground" )
-      elif 'VDDA' in pin_rows[ pin_num ][ "name" ]:
-        pin_rows[ pin_num ][ "peripherals" ].append( "Analog voltage supply" )
-      elif 'VSS' in pin_rows[ pin_num ][ "name" ]:
-        pin_rows[ pin_num ][ "peripherals" ].append( "Ground" )
-      elif 'VDD' in pin_rows[ pin_num ][ "name" ]:
-        pin_rows[ pin_num ][ "peripherals" ].append( "Voltage supply" )
-      elif 'BOOT0' in pin_rows[ pin_num ][ "name" ]:
-        pin_rows[ pin_num ][ "peripherals" ].append( "Boot memory select" )
-      elif 'NRST' in pin_rows[ pin_num ][ "name" ]:
-        pin_rows[ pin_num ][ "peripherals" ].append( "Reset" )
+    if 'VSSA' in pin_rows[ pin_num ][ "name" ]:
+      pin_rows[ pin_num ][ "peripherals" ].append( "Analog ground" )
+    elif 'VDDA' in pin_rows[ pin_num ][ "name" ]:
+      pin_rows[ pin_num ][ "peripherals" ].append( "Analog voltage supply" )
+    elif 'VSS' in pin_rows[ pin_num ][ "name" ]:
+      pin_rows[ pin_num ][ "peripherals" ].append( "Ground" )
+    elif 'VDD' in pin_rows[ pin_num ][ "name" ]:
+      pin_rows[ pin_num ][ "peripherals" ].append( "Voltage supply" )
+    elif 'BOOT0' in pin_rows[ pin_num ][ "name" ] and not 'BOOT0' in pin_rows[ pin_num ][ "peripherals" ]:
+      pin_rows[ pin_num ][ "peripherals" ].append( "Boot memory select" )
+    elif 'NRST' in pin_rows[ pin_num ][ "name" ]:
+      pin_rows[ pin_num ][ "peripherals" ].append( "Reset" )
     # DEBUG: Print out imported rows.
-    print( pin_rows[ pin_num ] )
+    #print( pin_rows[ pin_num ] )
 
 # Figure out how many peripherals there are to deal with.
 temp_periphs = []
@@ -81,7 +85,7 @@ for row in pin_rows:
     "I2C":         [],
     "SPI/I2S":     [],
     "USART":       [],
-    "USB/PD":      [],
+    "USB/CAN/PD":  [],
     "ADC/DAC":     [],
     "Timers":      [],
     "Comparators": [],
@@ -90,24 +94,27 @@ for row in pin_rows:
   }
   for periph in row[ "peripherals" ]:
     if "I2C" in periph:
-      periph_row[ "I2C" ].append( periph )
+      periph_row[ "I2C" ].append( periph.strip() )
     elif "SPI" in periph or "I2S" in periph:
-      periph_row[ "SPI/I2S" ].append( periph )
+      periph_row[ "SPI/I2S" ].append( periph.strip() )
     elif "USART" in periph or "UART" in periph or "LPUART" in periph:
-      periph_row[ "USART" ].append( periph )
-    elif "USB" in periph or "UCPD" in periph or "OTG" in periph:
-      periph_row[ "USB/PD" ].append( periph )
+      periph_row[ "USART" ].append( periph.strip() )
+    elif "USB" in periph or "UCPD" in periph or "OTG" in periph or "CAN" in periph:
+      periph_row[ "USB/CAN/PD" ].append( periph.strip() )
     elif "ADC" in periph or "DAC" in periph:
-      periph_row[ "ADC/DAC" ].append( periph )
+      periph_row[ "ADC/DAC" ].append( periph.strip() )
     elif "TIM" in periph or "LPTIM" in periph:
-      periph_row[ "Timers" ].append( periph )
+      periph_row[ "Timers" ].append( periph.strip() )
     elif "COMP" in periph:
-      periph_row[ "Comparators" ].append( periph )
-    # TODO: Op-Amps
+      periph_row[ "Comparators" ].append( periph.strip() )
+    elif "OPAMP" in periph:
+      periph_row[ "Op-Amps" ].append( periph.strip() )
     else:
       # Ignore some common values.
-      if periph != "EVENTOUT":
-        periph_row[ "Other" ].append( periph )
+      # TODO: SAI peripherals
+      # TODO: SWPMI peripherals
+      if not ( "EVENTOUT" in periph or "SAI" in periph or "SWPMI" in periph ):
+        periph_row[ "Other" ].append( periph.strip() )
   temp_periphs.append( periph_row )
   # Debug: Print out peripheral rows.
   #print( "{0:d}: Periphs: {1}".format( len( temp_periphs ), periph_row ) )
@@ -172,17 +179,18 @@ def types_from_str( pstr ):
     return [ "SPI", "I2S" ]
   elif pstr == "USART":
     return [ "USART", "LPUART", "UART" ]
-  elif pstr == "USB/PD":
-    return [ "USB", "OTG", "UCPD" ]
+  elif pstr == "USB/CAN/PD":
+    return [ "USB", "OTG", "UCPD", "CAN" ]
   elif pstr == "ADC/DAC":
     return [ "ADC", "DAC" ]
   elif pstr == "Timers":
     return [ "LPTIM", "TIM" ]
   elif pstr == "Comparators":
     return [ "COMP" ]
+  elif pstr == "Op-Amps":
+    return [ "OPAMP" ]
   elif pstr == "Other":
-    return [ "RTC_TAMP", "WKUP" ]
-  # TODO: Op-Amps
+    return [ "RTC_TAMP", "WKUP", "TSC_G" ]
   else:
     return []
 
@@ -190,7 +198,7 @@ def types_from_str( pstr ):
 def cell_color_for( cell_str, cell_types = None ):
   # Special cases:
   # Debugging pins.
-  if cell_str == "SWCLK" or cell_str == "SWDIO":
+  if cell_str == "SWCLK" or cell_str == "SWDIO" or cell_str == "JTCK" or cell_str == "JTDO" or cell_str == "JTDI" or cell_str == "NJTRST" or cell_str == "JTMS" or "TRACE" in cell_str:
     return "\\tcpE"
   # 'MCO' clock output pin.
   if cell_str == "MCO":
@@ -199,10 +207,10 @@ def cell_color_for( cell_str, cell_types = None ):
   if cell_str == "IR_OUT":
     return "\\tcpD"
   # Oscillator pins.
-  if "OSC_" in cell_str or "OSC32_" in cell_str:
+  if "OSC_" in cell_str or "OSC32_" in cell_str or cell_str == "CK_IN" or cell_str == "LSCO":
     return "\\tcpC"
   # 'Boot' pin[s].
-  if "Boot" in cell_str:
+  if "Boot" in cell_str or "BOOT" in cell_str:
     return "\\tcpF"
   # 'Reset' pin.
   if "Reset" in cell_str:
@@ -214,7 +222,7 @@ def cell_color_for( cell_str, cell_types = None ):
   if "Ground" in cell_str or "ground" in cell_str:
     return "\\tcpC"
   # Voltage reference pins.
-  if "VREF_" in cell_str:
+  if "VREF_" in cell_str or "PVD" in cell_str:
     return "\\tcpD"
   # Standard peripherals:
   if cell_types:
@@ -268,7 +276,10 @@ def cell_color_for( cell_str, cell_types = None ):
       elif "{0}0".format( cell_type ) in cell_str:
         return "\\tcpE"
       elif "{0}".format( cell_type ) in cell_str:
-        return "\\tcpA"
+        if cell_type == "USB":
+          return "\\tcpC"
+        else:
+          return "\\tcpA"
   # Other special cases.
   # Misc. RTC pins.
   if "RTC_" in cell_str:
@@ -380,10 +391,10 @@ t1f.write( "\\hline\n" )
 t2f.write( "\\hline\n" )
 write_table_row( periphs, periphs_max_1h, periphs_max_2h, periphs_to_use, "USART" )
 # Write the 'USB / Power Delivery' rows, if applicable.
-if "USB/PD" in periphs_to_use:
+if "USB/CAN/PD" in periphs_to_use:
   t1f.write( "\\hline\n" )
   t2f.write( "\\hline\n" )
-  write_table_row( periphs, periphs_max_1h, periphs_max_2h, periphs_to_use, "USB/PD" )
+  write_table_row( periphs, periphs_max_1h, periphs_max_2h, periphs_to_use, "USB/CAN/PD" )
 # Write the 'ADC/DAC' rows, if applicable.
 t1f.write( "\\hline\n" )
 t2f.write( "\\hline\n" )
@@ -397,7 +408,10 @@ if "Comparators" in periphs_to_use:
   t1f.write( "\\hline\n" )
   t2f.write( "\\hline\n" )
   write_table_row( periphs, periphs_max_1h, periphs_max_2h, periphs_to_use, "Comparators" )
-# TODO: Op-Amps
+if "Op-Amps" in periphs_to_use:
+  t1f.write( "\\hline\n" )
+  t2f.write( "\\hline\n" )
+  write_table_row( periphs, periphs_max_1h, periphs_max_2h, periphs_to_use, "Op-Amps" )
 # Write the 'Other' rows.
 t1f.write( "\\hline\n" )
 t2f.write( "\\hline\n" )

@@ -31,7 +31,7 @@ doc_start = '''
 \\newcommand{\\tcpF}[1]{\\cellcolor[HTML]{F2840E} #1}
 \\newcommand{\\tcpFup}[1]{\\upr{\\cellcolor[HTML]{F2840E} #1}}
 % Set page dimensions.
-\\usepackage[paperwidth=150em, paperheight=35em,
+\\usepackage[paperwidth=250em, paperheight=35em,
             top=5em, bottom=0em, left=0em, right=0em]{geometry}
 '''
 
