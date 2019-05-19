@@ -1,0 +1,92 @@
+
+\documentclass{article}
+\usepackage{multirow}
+\usepackage[table]{xcolor}
+\usepackage{tikz}
+\usepackage{tgheros}
+% The default underscores are very short :/
+\renewcommand{\_}[0]{\rule{5pt}{1pt}}
+% Use sans-serif font by default.
+\renewcommand{\familydefault}{\sfdefault}
+% Convenience commands for table styling.
+\newcommand{\upr}[1]{\raisebox{0.5em}[0.5em][0em]{#1}}
+\newcommand{\upri}[1]{\upr{\textit{#1}}}
+\newcommand{\uprb}[1]{\upr{\textbf{#1}}}
+% Styling for 'N/A' cells.
+\newcommand{\tcna}[1]{\cellcolor[HTML]{CCCCCC} \textit{#1}}
+\newcommand{\tcnaup}[1]{\tcna{\upri{#1}}}
+% Styling for peripheral cells.
+\newcommand{\tcpA}[1]{\cellcolor[HTML]{2EF43F} #1}
+\newcommand{\tcpAup}[1]{\upr{\cellcolor[HTML]{2EF43F} #1}}
+\newcommand{\tcpB}[1]{\cellcolor[HTML]{EF7CD8} #1}
+\newcommand{\tcpBup}[1]{\upr{\cellcolor[HTML]{EF7CD8} #1}}
+\newcommand{\tcpC}[1]{\cellcolor[HTML]{1DABE2} #1}
+\newcommand{\tcpCup}[1]{\upr{\cellcolor[HTML]{1DABE2} #1}}
+\newcommand{\tcpD}[1]{\cellcolor[HTML]{E83030} #1}
+\newcommand{\tcpDup}[1]{\upr{\cellcolor[HTML]{E83030} #1}}
+\newcommand{\tcpE}[1]{\cellcolor[HTML]{C8EA1E} #1}
+\newcommand{\tcpEup}[1]{\upr{\cellcolor[HTML]{C8EA1E} #1}}
+\newcommand{\tcpF}[1]{\cellcolor[HTML]{F2840E} #1}
+\newcommand{\tcpFup}[1]{\upr{\cellcolor[HTML]{F2840E} #1}}
+% Set page dimensions.
+\usepackage[paperwidth=500em, paperheight=50em,
+            top=5em, bottom=0em, left=0em, right=0em]{geometry}
+
+\begin{document}
+\pagenumbering{gobble}
+
+\begin{table}[h!]
+  \begin{center}
+    \begin{tikzpicture}
+      \node (table) [inner sep=0pt] {
+        \begin{tabular}{l|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c}
+\textbf{Pin \#} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} & \textbf{6} & \textbf{7} & \textbf{8} & \textbf{9} & \textbf{10} & \textbf{11} & \textbf{12} & \textbf{13} & \textbf{14} & \textbf{15} & \textbf{16} & \textbf{17} & \textbf{18} & \textbf{19} & \textbf{20} & \textbf{21} & \textbf{22} & \textbf{23} & \textbf{24} & \textbf{25} & \textbf{26} & \textbf{27} & \textbf{28} & \textbf{29} & \textbf{30} & \textbf{31} & \textbf{32} & \textbf{33} & \textbf{34} & \textbf{35} & \textbf{36} & \textbf{37} & \textbf{38} & \textbf{39} & \textbf{40} & \textbf{41} & \textbf{42} & \textbf{43} & \textbf{44} & \textbf{45} & \textbf{46} & \textbf{47} & \textbf{48} & \textbf{49} & \textbf{50} \\
+\hline
+\multirow{2}{*}{\textbf{Pin Name}} & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & \\
+& \uprb{PE2}& \uprb{PE3}& \uprb{PE4}& \uprb{PE5}& \uprb{PE6}& \uprb{VBAT}& \uprb{PC13}& \uprb{PC14-OSC32\_IN}& \uprb{PC15-OSC32\_OUT}& \uprb{VSS}& \uprb{VDD}& \uprb{PH0-OSC\_IN}& \uprb{PH1-OSC\_OUT}& \uprb{NRST}& \uprb{PC0}& \uprb{PC1}& \uprb{PC2}& \uprb{PC3}& \uprb{VSSA}& \uprb{VREF-}& \uprb{VREF+}& \uprb{VDDA}& \uprb{PA0}& \uprb{PA1}& \uprb{PA2}& \uprb{PA3}& \uprb{VSS}& \uprb{VDD}& \uprb{PA4}& \uprb{PA5}& \uprb{PA6}& \uprb{PA7}& \uprb{PC4}& \uprb{PC5}& \uprb{PB0}& \uprb{PB1}& \uprb{PB2}& \uprb{PE7}& \uprb{PE8}& \uprb{PE9}& \uprb{PE10}& \uprb{PE11}& \uprb{PE12}& \uprb{PE13}& \uprb{PE14}& \uprb{PE15}& \uprb{PB10}& \uprb{PB11}& \uprb{VSS}& \uprb{VDD}\\
+\hline
+\textbf{I2C}
+& \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcpC{I2C3\_SCL} & \tcpC{I2C3\_SDA} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcpC{I2C3\_SMBA} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcpB{I2C2\_SCL} & \tcpB{I2C2\_SDA} & \tcna{N/A} & \tcna{N/A}  \\
+\hline
+\multirow{2}{*}{\textbf{SPI/I2S}}& \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcpB{} & \tcpB{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcpA{SPI1\_NSS} & \tcpA{} & \tcpA{SPI1\_MISO} & \tcpA{SPI1\_MOSI} & \tcna{} & \tcna{} & \tcpF{} & \tcpF{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcpF{} & \tcpF{} & \tcpA{SPI1\_NSS} & \tcpA{SPI1\_SCK} & \tcpA{SPI1\_MISO} & \tcpA{SPI1\_MOSI} & \tcpB{SPI2\_SCK} & \tcpF{} & \tcna{} & \tcna{}  \\
+& \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcpBup{SPI2\_MISO} & \tcpBup{SPI2\_MOSI} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcpC{SPI3\_NSS} & \tcpAup{SPI1\_SCK} & \tcpF{QUADSPI\_BK1\_IO3} & \tcpF{QUADSPI\_BK1\_IO2} & \tcnaup{N/A} & \tcnaup{N/A} & \tcpFup{QUADSPI\_BK1\_IO1} & \tcpFup{QUADSPI\_BK1\_IO0} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcpFup{QUADSPI\_CLK} & \tcpFup{QUADSPI\_NCS} & \tcpF{QUADSPI\_BK1\_IO0} & \tcpF{QUADSPI\_BK1\_IO1} & \tcpF{QUADSPI\_BK1\_IO2} & \tcpF{QUADSPI\_BK1\_IO3} & \tcpF{QUADSPI\_CLK} & \tcpFup{QUADSPI\_NCS} & \tcnaup{N/A} & \tcnaup{N/A}  \\
+\hline
+\multirow{2}{*}{\textbf{USART}}& \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcpA{} & \tcpA{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcpB{USART2\_CTS} & \tcpB{USART2\_RTS\_DE} & \tcpB{} & \tcpB{} & \tcna{} & \tcna{} & \tcpB{} & \tcna{} & \tcpC{} & \tcna{} & \tcpC{} & \tcpC{} & \tcpC{} & \tcpC{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcpC{USART3\_TX} & \tcpC{USART3\_RX} & \tcna{} & \tcna{}  \\
+& \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcpAup{LPUART1\_RX} & \tcpAup{LPUART1\_TX} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcpD{UART4\_TX} & \tcpD{UART4\_RX} & \tcpBup{USART2\_TX} & \tcpBup{USART2\_RX} & \tcnaup{N/A} & \tcnaup{N/A} & \tcpBup{USART2\_CK} & \tcnaup{N/A} & \tcpCup{USART3\_CTS} & \tcnaup{N/A} & \tcpCup{USART3\_TX} & \tcpCup{USART3\_RX} & \tcpCup{USART3\_CK} & \tcpCup{USART3\_RTS\_DE} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcpA{LPUART1\_RX} & \tcpA{LPUART1\_TX} & \tcnaup{N/A} & \tcnaup{N/A}  \\
+\hline
+\textbf{USB/CAN/PD}
+& \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A}  \\
+\hline
+\multirow{2}{*}{\textbf{ADC/DAC}}& \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcpF{} & \tcpF{} & \tcpF{} & \tcpF{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcpF{} & \tcpF{} & \tcpF{} & \tcpF{} & \tcna{} & \tcna{} & \tcpF{ADC12\_IN9} & \tcpF{ADC12\_IN10} & \tcpF{} & \tcpF{} & \tcpF{} & \tcpF{} & \tcpF{} & \tcpF{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{}  \\
+& \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcpFup{ADC123\_IN1} & \tcpFup{ADC123\_IN2} & \tcpFup{ADC123\_IN3} & \tcpFup{ADC123\_IN4} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcpFup{ADC12\_IN5} & \tcpFup{ADC12\_IN6} & \tcpFup{ADC12\_IN7} & \tcpFup{ADC12\_IN8} & \tcnaup{N/A} & \tcnaup{N/A} & \tcpA{DAC1\_OUT1} & \tcpA{DAC1\_OUT2} & \tcpFup{ADC12\_IN11} & \tcpFup{ADC12\_IN12} & \tcpFup{ADC12\_IN13} & \tcpFup{ADC12\_IN14} & \tcpFup{ADC12\_IN15} & \tcpFup{ADC12\_IN16} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A}  \\
+\hline
+\textbf{FSMC}
+& \tcpC{FMC\_A23} & \tcpC{FMC\_A19} & \tcpC{FMC\_A20} & \tcpC{FMC\_A21} & \tcpC{FMC\_A22} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcpF{FMC\_D4} & \tcpF{FMC\_D5} & \tcpF{FMC\_D6} & \tcpF{FMC\_D7} & \tcpF{FMC\_D8} & \tcpF{FMC\_D9} & \tcpF{FMC\_D10} & \tcpF{FMC\_D11} & \tcpF{FMC\_D12} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A}  \\
+\hline
+\multirow{6}{*}{\textbf{Timers}}& \tcpC{} & \tcpC{} & \tcpC{} & \tcpC{} & \tcpC{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcpA{} & \tcpA{} & \tcpA{} & \tcpA{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcpB{} & \tcpB{} & \tcpB{} & \tcpB{} & \tcna{} & \tcna{} & \tcpB{} & \tcpB{} & \tcpA{TIM1\_BKIN} & \tcpA{} & \tcna{} & \tcna{} & \tcpA{} & \tcpA{} & \tcpA{} & \tcpA{} & \tcpA{} & \tcpA{} & \tcpA{} & \tcpA{} & \tcpA{} & \tcpA{} & \tcpA{} & \tcpA{} & \tcpB{} & \tcpB{} & \tcna{} & \tcna{}  \\
+& \tcpC{} & \tcpC{} & \tcpC{} & \tcpC{} & \tcpC{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcpA{LPTIM1\_IN1} & \tcpA{} & \tcpA{} & \tcpA{LPTIM1\_ETR} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcpBup{TIM2\_CH1} & \tcpBup{TIM2\_CH2} & \tcpBup{TIM2\_CH3} & \tcpBup{TIM2\_CH4} & \tcna{} & \tcna{} & \tcpB{} & \tcpBup{TIM2\_CH1} & \tcpC{TIM3\_CH1} & \tcpAup{TIM1\_CH1N} & \tcna{} & \tcna{} & \tcpAup{TIM1\_CH2N} & \tcpAup{TIM1\_CH3N} & \tcpA{} & \tcpA{} & \tcpA{} & \tcpA{} & \tcpA{} & \tcpA{} & \tcpA{} & \tcpA{} & \tcpAup{TIM1\_CH4} & \tcpA{TIM1\_BKIN} & \tcpB{} & \tcpB{} & \tcna{} & \tcna{}  \\
+& \tcpC{} & \tcpC{} & \tcpC{} & \tcpC{} & \tcpC{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcpA{} & \tcpA{} & \tcpA{} & \tcpA{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcpE{} & \tcpE{} & \tcpE{} & \tcpE{} & \tcna{} & \tcna{} & \tcpB{} & \tcpB{} & \tcpB{TIM8\_BKIN} & \tcpC{} & \tcna{} & \tcna{} & \tcpC{} & \tcpC{} & \tcpA{} & \tcpA{} & \tcpA{} & \tcpA{} & \tcpA{} & \tcpA{} & \tcpA{} & \tcpA{} & \tcpA{} & \tcpA{} & \tcpB{} & \tcpB{} & \tcna{} & \tcna{}  \\
+& \tcpCup{TIM3\_ETR} & \tcpCup{TIM3\_CH1} & \tcpCup{TIM3\_CH2} & \tcpCup{TIM3\_CH3} & \tcpCup{TIM3\_CH4} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcpB{} & \tcpAup{LPTIM1\_OUT} & \tcpAup{LPTIM1\_IN2} & \tcpB{} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcpEup{TIM5\_CH1} & \tcpEup{TIM5\_CH2} & \tcpEup{TIM5\_CH3} & \tcpEup{TIM5\_CH4} & \tcnaup{N/A} & \tcnaup{N/A} & \tcpBup{LPTIM2\_OUT} & \tcpBup{TIM2\_ETR} & \tcpA{TIM1\_BKIN\_COMP2} & \tcpCup{TIM3\_CH2} & \tcnaup{N/A} & \tcnaup{N/A} & \tcpCup{TIM3\_CH3} & \tcpCup{TIM3\_CH4} & \tcpAup{LPTIM1\_OUT} & \tcpAup{TIM1\_ETR} & \tcpAup{TIM1\_CH1N} & \tcpAup{TIM1\_CH1} & \tcpAup{TIM1\_CH2N} & \tcpAup{TIM1\_CH2} & \tcpAup{TIM1\_CH3N} & \tcpAup{TIM1\_CH3} & \tcpAup{TIM1\_BKIN2} & \tcpA{} & \tcpBup{TIM2\_CH3} & \tcpBup{TIM2\_CH4} & \tcnaup{N/A} & \tcnaup{N/A}  \\
+& \tcpC{} & \tcpC{} & \tcpC{} & \tcpC{} & \tcpC{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcpB{LPTIM2\_IN1} & \tcpA{} & \tcpA{} & \tcpB{LPTIM2\_ETR} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcpB{} & \tcpC{} & \tcpC{} & \tcpC{} & \tcna{} & \tcna{} & \tcpB{} & \tcpB{} & \tcpB{TIM8\_BKIN\_COMP2} & \tcpB{} & \tcna{} & \tcna{} & \tcpB{} & \tcpB{} & \tcpA{} & \tcpA{} & \tcpA{} & \tcpA{} & \tcpA{} & \tcpA{} & \tcpA{} & \tcpA{} & \tcpA{} & \tcpA{TIM1\_BKIN\_COMP1} & \tcpB{} & \tcpB{} & \tcna{} & \tcna{}  \\
+& \tcpC{} & \tcpC{} & \tcpC{} & \tcpC{} & \tcpC{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcpB{} & \tcpA{} & \tcpA{} & \tcpB{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcpBup{TIM8\_ETR} & \tcpCup{TIM15\_CH1N} & \tcpCup{TIM15\_CH1} & \tcpCup{TIM15\_CH2} & \tcna{} & \tcna{} & \tcpB{} & \tcpBup{TIM8\_CH1N} & \tcpD{TIM16\_CH1} & \tcpBup{TIM8\_CH1N} & \tcna{} & \tcna{} & \tcpBup{TIM8\_CH2N} & \tcpBup{TIM8\_CH3N} & \tcpA{} & \tcpA{} & \tcpA{} & \tcpA{} & \tcpA{} & \tcpA{} & \tcpA{} & \tcpA{} & \tcpAup{TIM1\_BKIN2\_COMP2} & \tcpA{} & \tcpB{} & \tcpB{} & \tcna{} & \tcna{}  \\
+\hline
+\textbf{Comparators}
+& \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcpA{COMP1\_INM} & \tcpA{COMP1\_INP} & \tcpA{COMP1\_OUT} & \tcpA{COMP1\_INM} & \tcpA{COMP1\_INP} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcpA{COMP1\_OUT} & \tcpB{COMP2\_OUT} & \tcna{N/A} & \tcna{N/A}  \\
+\hline
+\textbf{Op-Amps}
+& \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcpA{OPAMP1\_VINP} & \tcpA{OPAMP1\_VINM} & \tcna{N/A} & \tcpA{OPAMP1\_VOUT} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcpB{OPAMP2\_VINP} & \tcpB{OPAMP2\_VINM} & \tcna{N/A} & \tcna{N/A} & \tcpB{OPAMP2\_VOUT} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A} & \tcna{N/A}  \\
+\hline
+\multirow{4}{*}{\textbf{Other}}& \tcpE{} & \tcpE{} & \tcpE{} & \tcpE{} & \tcpE{} & \tcna{} & \tcpA{RTC\_TAMP1} & \tcpC{} & \tcpC{} & \tcpC{} & \tcpD{} & \tcpC{} & \tcpC{} & \tcpE{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcpC{} & \tcna{} & \tcpD{} & \tcpD{} & \tcpB{} & \tcna{} & \tcpD{} & \tcna{} & \tcpC{} & \tcpD{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcpE{} & \tcna{} & \tcna{} & \tcpE{} & \tcna{} & \tcna{} & \tcna{} & \tcpE{} & \tcpE{} & \tcpE{} & \tcpE{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcpC{} & \tcpD{}  \\
+& \tcpEup{TRACECK} & \tcpEup{TRACED0} & \tcpEup{TRACED1} & \tcpEup{TRACED2} & \tcpEup{TRACED3} & \tcna{} & \tcpE{RTC\_TS} & \tcpC{} & \tcpC{} & \tcpC{} & \tcpD{} & \tcpC{} & \tcpC{} & \tcpE{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcpC{} & \tcna{} & \tcpD{} & \tcpD{} & \tcpBup{RTC\_TAMP2} & \tcna{} & \tcpDup{WKUP4} & \tcna{} & \tcpC{} & \tcpD{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcpE{} & \tcna{} & \tcna{} & \tcpE{} & \tcna{} & \tcna{} & \tcna{} & \tcpE{} & \tcpE{} & \tcpE{} & \tcpE{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcpC{} & \tcpD{}  \\
+& \tcpA{} & \tcpA{} & \tcpA{} & \tcpA{} & \tcpC{} & \tcnaup{N/A} & \tcpE{RTC\_OUT} & \tcpCup{OSC32\_IN} & \tcpCup{OSC32\_OUT} & \tcpCup{Ground} & \tcpDup{Voltage supply} & \tcpCup{OSC\_IN} & \tcpCup{OSC\_OUT} & \tcpEup{Reset} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcpCup{Analog ground} & \tcnaup{N/A} & \tcpDup{VREFBUF\_OUT} & \tcpDup{Analog voltage supply} & \tcpA{} & \tcnaup{N/A} & \tcpC{} & \tcnaup{N/A} & \tcpCup{Ground} & \tcpDup{Voltage supply} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcpEup{WKUP5} & \tcnaup{N/A} & \tcnaup{N/A} & \tcpEup{RTC\_OUT} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcpEup{TSC\_G5\_IO1} & \tcpEup{TSC\_G5\_IO2} & \tcpEup{TSC\_G5\_IO3} & \tcpEup{TSC\_G5\_IO4} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcnaup{N/A} & \tcpCup{Ground} & \tcpDup{Voltage supply}  \\
+& \tcpAup{TSC\_G7\_IO1} & \tcpAup{TSC\_G7\_IO2} & \tcpAup{TSC\_G7\_IO3} & \tcpAup{TSC\_G7\_IO4} & \tcpCup{RTC\_TAMP3} & \tcna{} & \tcpB{WKUP2} & \tcpC{} & \tcpC{} & \tcpC{} & \tcpD{} & \tcpC{} & \tcpC{} & \tcpE{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcpC{} & \tcna{} & \tcpD{} & \tcpD{} & \tcpAup{WKUP1} & \tcna{} & \tcpCup{LSCO} & \tcna{} & \tcpC{} & \tcpD{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcpE{} & \tcna{} & \tcna{} & \tcpE{} & \tcna{} & \tcna{} & \tcna{} & \tcpE{} & \tcpE{} & \tcpE{} & \tcpE{} & \tcna{} & \tcna{} & \tcna{} & \tcna{} & \tcpC{} & \tcpD{}  \\
+
+        \end{tabular}
+      };
+      \draw [rounded corners=0.5em]
+        (table.north west) rectangle (table.south east);
+    \end{tikzpicture}
+  \end{center}
+\end{table}
+
+\end{document}
