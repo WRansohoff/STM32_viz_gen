@@ -28,4 +28,4 @@ It generates the same LaTeX files as the other scripts, but without the tedious 
 
 # Example
 
-<img src="./examples/STM32L031Gx.svg">
+<img src="./examples/STM32L475VG.svg">
