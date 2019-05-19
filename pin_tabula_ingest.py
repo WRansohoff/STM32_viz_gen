@@ -87,6 +87,7 @@ for row in pin_rows:
     "USART":       [],
     "USB/CAN/PD":  [],
     "ADC/DAC":     [],
+    "FSMC":        [],
     "Timers":      [],
     "Comparators": [],
     "Op-Amps":     [],
@@ -103,6 +104,8 @@ for row in pin_rows:
       periph_row[ "USB/CAN/PD" ].append( periph.strip() )
     elif "ADC" in periph or "DAC" in periph:
       periph_row[ "ADC/DAC" ].append( periph.strip() )
+    elif "FMC" in periph or "FSMC" in periph:
+      periph_row[ "FSMC" ].append( periph.strip() )
     elif "TIM" in periph or "LPTIM" in periph:
       periph_row[ "Timers" ].append( periph.strip() )
     elif "COMP" in periph:
@@ -113,7 +116,9 @@ for row in pin_rows:
       # Ignore some common values.
       # TODO: SAI peripherals
       # TODO: SWPMI peripherals
-      if not ( "EVENTOUT" in periph or "SAI" in periph or "SWPMI" in periph ):
+      # TODO: SDMMC peripherals
+      # TODO: DFSDM peripherals
+      if not ( "EVENTOUT" in periph or "SAI" in periph or "SWPMI" in periph or "SDMMC" in periph or "DFSDM" in periph ):
         periph_row[ "Other" ].append( periph.strip() )
   temp_periphs.append( periph_row )
   # Debug: Print out peripheral rows.
@@ -183,6 +188,8 @@ def types_from_str( pstr ):
     return [ "USB", "OTG", "UCPD", "CAN" ]
   elif pstr == "ADC/DAC":
     return [ "ADC", "DAC" ]
+  elif pstr == "FSMC":
+    return [ "FMC", "FSMC" ]
   elif pstr == "Timers":
     return [ "LPTIM", "TIM" ]
   elif pstr == "Comparators":
@@ -278,12 +285,23 @@ def cell_color_for( cell_str, cell_types = None ):
       elif "{0}".format( cell_type ) in cell_str:
         if cell_type == "USB":
           return "\\tcpC"
+        elif "QUADSPI" in cell_str or "QSPI" in cell_str:
+          return "\\tcpF"
+        elif cell_type == "FMC" or cell_type == "FSMC":
+          if "FMC_D" in cell_str or "FSMC_D" in cell_str:
+            return "\\tcpF"
+          elif "FMC_A" in cell_str or "FSMC_A" in cell_str:
+            return "\\tcpC"
+          else:
+            return "\\tcpB"
         else:
           return "\\tcpA"
   # Other special cases.
   # Misc. RTC pins.
-  if "RTC_" in cell_str:
+  if "RTC_" in cell_str or "TSC_" in cell_str:
     return "\\tcpE"
+  elif "VREF" in cell_str:
+    return "\\tcpD"
   return "\\tcna"
 
 # Method to get a table cell color for a given peripheral.
@@ -363,6 +381,8 @@ t1f.write( doc_start )
 t2f.write( doc_start )
 t1f.write( doc_table_start )
 t2f.write( doc_table_start )
+tsep = "\\hline\n"
+#tsep = "\\hline\n\\hline\n"
 # Write column layout; ( # pins / 2 ) + 1.
 t1f.write( "l" )
 t2f.write( "l" )
@@ -372,58 +392,75 @@ for i in range( tlen ):
 t1f.write( "}\n" )
 t2f.write( "}\n" )
 # Write the Table 1 'Pin Name' row on top.
+t1f.write( "\\textbf{Pin \\#} " )
+for i in range( tlen ):
+  t1f.write( "& \\textbf{{{0:d}}} ".format( i + 1 ) )
+t1f.write( "\\\\\n" )
+t1f.write( tsep )
 t1f.write( "\\multirow{2}{*}{\\textbf{Pin Name}} " )
 for i in range( tlen ):
   t1f.write( "& " )
 t1f.write( "\\\\\n" )
 for i in range( tlen ):
   t1f.write( "& \\uprb{{{0}}}".format( periphs[ i ][ "Name" ].replace( "_", "\_" ) ) )
-t1f.write( "\\\\\n\\hline\n" )
+t1f.write( "\\\\\n" )
+t1f.write( tsep )
 # TODO: Make an iterable object for periph names.
 # Write the 'I2C' rows, if applicable.
 write_table_row( periphs, periphs_max_1h, periphs_max_2h, periphs_to_use, "I2C" )
 # Write the 'SPI' rows, if applicable.
-t1f.write( "\\hline\n" )
-t2f.write( "\\hline\n" )
+t1f.write( tsep )
+t2f.write( tsep )
 write_table_row( periphs, periphs_max_1h, periphs_max_2h, periphs_to_use, "SPI/I2S" )
 # Write the 'USART' rows, if applicable.
-t1f.write( "\\hline\n" )
-t2f.write( "\\hline\n" )
+t1f.write( tsep )
+t2f.write( tsep )
 write_table_row( periphs, periphs_max_1h, periphs_max_2h, periphs_to_use, "USART" )
 # Write the 'USB / Power Delivery' rows, if applicable.
 if "USB/CAN/PD" in periphs_to_use:
-  t1f.write( "\\hline\n" )
-  t2f.write( "\\hline\n" )
+  t1f.write( tsep )
+  t2f.write( tsep )
   write_table_row( periphs, periphs_max_1h, periphs_max_2h, periphs_to_use, "USB/CAN/PD" )
 # Write the 'ADC/DAC' rows, if applicable.
-t1f.write( "\\hline\n" )
-t2f.write( "\\hline\n" )
+t1f.write( tsep )
+t2f.write( tsep )
 write_table_row( periphs, periphs_max_1h, periphs_max_2h, periphs_to_use, "ADC/DAC" )
+# Write the 'Flexible Static Memory Controller' rows, if applicable.
+if "FSMC" in periphs_to_use:
+  t1f.write( tsep )
+  t2f.write( tsep )
+  write_table_row( periphs, periphs_max_1h, periphs_max_2h, periphs_to_use, "FSMC" )
 # Write the 'Timer' rows, if applicable.
-t1f.write( "\\hline\n" )
-t2f.write( "\\hline\n" )
+t1f.write( tsep )
+t2f.write( tsep )
 write_table_row( periphs, periphs_max_1h, periphs_max_2h, periphs_to_use, "Timers" )
 # Write the 'Comparator' rows, if applicable.
 if "Comparators" in periphs_to_use:
-  t1f.write( "\\hline\n" )
-  t2f.write( "\\hline\n" )
+  t1f.write( tsep )
+  t2f.write( tsep )
   write_table_row( periphs, periphs_max_1h, periphs_max_2h, periphs_to_use, "Comparators" )
 if "Op-Amps" in periphs_to_use:
-  t1f.write( "\\hline\n" )
-  t2f.write( "\\hline\n" )
+  t1f.write( tsep )
+  t2f.write( tsep )
   write_table_row( periphs, periphs_max_1h, periphs_max_2h, periphs_to_use, "Op-Amps" )
 # Write the 'Other' rows.
-t1f.write( "\\hline\n" )
-t2f.write( "\\hline\n" )
+t1f.write( tsep )
+t2f.write( tsep )
 write_table_row( periphs, periphs_max_1h, periphs_max_2h, periphs_to_use, "Other" )
 # Write the Table 2 'Pin Name' row on bottom.
-t2f.write( "\\hline\n" )
+t2f.write( tsep )
 t2f.write( "\\multirow{2}{*}{\\textbf{Pin Name}} " )
 for i in range( tlen ):
   t2f.write( "& " )
 t2f.write( "\\\\\n" )
 for i in range( tlen ):
   t2f.write( "& \\uprb{{{0}}}".format( periphs[ len( periphs ) - ( i + 1 ) ][ "Name" ].replace( "_", "\_" ) ) )
+t2f.write( "\\\\\n" )
+t2f.write( tsep )
+t2f.write( "\\textbf{Pin \\#} " )
+for i in range( tlen ):
+  t2f.write( "& \\textbf{{{0:d}}} ".format( len( periphs ) - i ) )
+t2f.write( "\\\\\n" )
 # Done; write closing logic.
 t1f.write( doc_table_end )
 t2f.write( doc_table_end )
